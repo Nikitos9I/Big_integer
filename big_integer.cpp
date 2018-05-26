@@ -1,5 +1,6 @@
 #include "big_integer.h"
 #include <iostream>
+#include <limits>
 
 typedef unsigned int ui;
 
