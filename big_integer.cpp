@@ -427,21 +427,6 @@ big_integer& big_integer::operator|=(big_integer const& b) {
     return make_binary_op(*this, b, 3);
 }
 
-void show(big_integer const& a) {
-    if (a.sign) {
-        std::cout << "-";
-    }
-
-    for (int i = 0; i < a.body.size(); i++) {
-        std::bitset<32> tmp(a.body[i]);
-        std::string ans = tmp.to_string();
-        //reverse(ans.begin(), ans.end());
-        std::cout << ans << "  ";
-    }
-
-    std::cout << endl;
-}
-
 big_integer& big_integer::operator<<=(int b) {
     if (b < 0) {
         *this >>= (-b);
