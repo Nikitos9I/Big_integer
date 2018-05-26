@@ -279,14 +279,14 @@ big_integer& big_integer::operator/=(big_integer const& b) {
     } else if (b.body.size() == 1) {
         div_long_short(*this, b.body[0]);
     } else {
-        static big_integer dop;
+        big_integer dop;
         dop.body.clear();
         opt_vector result;
 
         while (body.size() != 0) {
             dop.body.push_front(body.back());
             body.pop_back();
-            unsigned l = binary(dop, b);
+            ui l = binary(dop, b);
 
             if (result.size() != 1 || l != 0) {
                 result.push_back(l);
@@ -513,7 +513,7 @@ big_integer& big_integer::operator>>=(int b) {
         }
     }
 
-    *this = sign == 1 ? double_code(*this + 1) :  *this;
+    *this = sign == 1 ? double_code(*this + 1) : *this;
     normalize(*this);
     return *this;
 }
