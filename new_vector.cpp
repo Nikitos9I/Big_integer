@@ -5,6 +5,7 @@
 #include "new_vector.h"
 #include <iostream>
 #include <cassert>
+#include <algorithm>
 
 opt_vector::opt_vector() : small_number(0), opt_size(0), is_big(false) {}
 
@@ -146,14 +147,14 @@ void opt_vector::push_back(unsigned a) {
 }
 
 void opt_vector::pop_back() {
-    assert(opt_size == 0);
-
     if (is_big) {
         make_alone();
         big_number -> data.pop_back();
     }
 
-    opt_size--;
+    if (opt_size != 0) {
+        opt_size--;
+    }
 }
 
 

@@ -18,4 +18,4 @@ if(CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
   set(CMAKE_CXX_FLAGS_RELEASE  "${CMAKE_CXX_FLAGS_RELEASE} -O3")
 endif()
 
-target_link_libraries(big_integer_testing -lgmp -lgmpxx -lpthread)
+target_link_libraries(big_integer_testing -lpthread)

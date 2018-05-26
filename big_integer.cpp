@@ -1,6 +1,7 @@
 #include "big_integer.h"
 #include <iostream>
 #include <limits>
+#include <algorithm>
 
 typedef unsigned int ui;
 
@@ -438,7 +439,7 @@ big_integer& big_integer::operator<<=(int b) {
 
     if (ost) {
         for (int i = 0; i < (int) body.size(); ++i) {
-            auto now = body[i] << ost;
+            unsigned long long now = body[i] << ost;
             body[i] = castToUi(now % SHIFTED_LENGTH + last);
 
             if (now >= SHIFTED_LENGTH) {
@@ -506,7 +507,7 @@ big_integer& big_integer::operator>>=(int b) {
         ui M = castToUi(1 << ost);
 
         for (int i = (int) body.size() - count - 1; i >= 0; --i) {
-            auto f = body[i] + (last << 32);
+            unsigned long long f = body[i] + (last << 32);
             last = f % M;
             body[i] = castToUi(f >> ost);
         }
