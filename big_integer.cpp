@@ -18,7 +18,7 @@ void normalize(big_integer &a) {
 
 template<typename T>
 ui castToUi(T x) {
-    return static_cast<ui>(x < 0? -x : x);
+    return x < 0 ? -static_cast<ui>(x) : static_cast<ui>(x);
 }
 
 big_integer::big_integer() : body(1, 0), sign(0) {}
@@ -484,7 +484,7 @@ big_integer& big_integer::operator>>=(int b) {
         --*this;
     }
 
-    int count = b / 32;
+    size_t count = b / 32;
     int ost = b % 32;
 
     unsigned long long last  = 0;
