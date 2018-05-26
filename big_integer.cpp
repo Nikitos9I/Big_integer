@@ -147,7 +147,7 @@ unsigned int binary (const big_integer &dop, const big_integer &second) {
     }
 
     opt_vector temp;
-    while (l < r -1) {
+    while (l < r - 1) {
         ui m = castToUi((l + r) >> 1);
 
         multiply(temp, second.body, m);
@@ -454,11 +454,11 @@ big_integer& big_integer::operator<<=(int b) {
     size_t k = body.size();
     body.resize(k + count);
 
-    for (int i = 0; i < (int) count; i++) {
+    for (size_t i = 0; i < count; i++) {
         body[i + k] = body[i];
     }
 
-    for (int i = 0; i < count; i++) {
+    for (size_t i = 0; i < count; i++) {
         body[i]= 0;
     }
 
