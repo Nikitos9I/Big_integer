@@ -427,19 +427,34 @@ big_integer& big_integer::operator|=(big_integer const& b) {
     return make_binary_op(*this, b, 3);
 }
 
+void show(big_integer const& a) {
+    if (a.sign) {
+        std::cout << "-";
+    }
+
+    for (int i = 0; i < a.body.size(); i++) {
+        std::bitset<32> tmp(a.body[i]);
+        std::string ans = tmp.to_string();
+        //reverse(ans.begin(), ans.end());
+        std::cout << ans << "  ";
+    }
+
+    std::cout << endl;
+}
+
 big_integer& big_integer::operator<<=(int b) {
     if (b < 0) {
         *this >>= (-b);
         return *this;
     }
 
-    int count = b / 32;
+    size_t count = b / 32;
     int ost = b % 32;
-    unsigned int last = 0;
+    unsigned int last  = 0;
 
     if (ost) {
         for (int i = 0; i < (int) body.size(); ++i) {
-            unsigned long long now = body[i] << ost;
+            unsigned long long now = (unsigned long long) body[i] << ost;
             body[i] = castToUi(now % SHIFTED_LENGTH + last);
 
             if (now >= SHIFTED_LENGTH) {
@@ -449,21 +464,17 @@ big_integer& big_integer::operator<<=(int b) {
                 break;
             }
         }
-
-        if (last) {
-            body.push_back(last);
-        }
     }
 
     size_t k = body.size();
     body.resize(k + count);
 
-    for (int i = 0; i < count; i++) {
+    for (int i = 0; i < (int) count; i++) {
         body[i + k] = body[i];
     }
 
     for (int i = 0; i < count; i++) {
-        body[i] = 0;
+        body[i]= 0;
     }
 
     if (body.back() == 0 && body.size() == 1) {
